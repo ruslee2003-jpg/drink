@@ -1,0 +1,162 @@
+// ==========================================================
+// ⚠ โน้ตแจ้งเตือนก่อนเขียนโค้ด
+// 1) Bootstrap เลือกสีตัวอักษรของ .btn-warning ให้เอง อาจได้สีขาวบนพื้น
+//    ทองกาแฟ (#B8864A) ซึ่งคอนทราสต์ ~2.8:1 → ไม่ผ่าน
+// 2) ไฟล์นี้กันไว้แล้วด้วย $min-contrast-ratio:3 + $color-contrast-dark
+// 3) แต่ให้ชัวร์: ใช้ .btn-cta (บังคับ --bs-btn-color:#24150F) กับปุ่ม
+//    สั่งซื้อ/ชำระเงินทุกปุ่ม
+// 4) เลี่ยง .text-warning ทั้งหมด → ใช้ .text-matcha (#4C5C2E) หรือ .text-body
+// ==========================================================
+
+// ==========================================================
+// Nisreen Coffee — Bootstrap 5.3 theme variables
+// วางไฟล์นี้ก่อน @import "bootstrap/scss/bootstrap";
+// ==========================================================
+
+// ---------- 1) พาเลตของร้าน (8 สีที่ไม่ซ้ำ) ----------
+$coffee-dark:  #24150F; // กาแฟเข้ม
+$coffee:       #5A321F; // กาแฟ
+$coffee-gold:  #B8864A; // ทองกาแฟ — ใช้เฉพาะปุ่ม CTA
+$cream:        #F7F1E8; // ครีม
+$matcha:       #667A3E; // มัทฉะ
+$matcha-light: #E8EDDA; // มัทฉะอ่อน
+$white:        #FFFFFF; // ขาว
+$ink:          #29231F; // ตัวอักษร
+
+// สีช่วยที่ได้จากพาเลต (สำหรับข้อความเล็ก/เส้นขอบ)
+$matcha-ink:   #4C5C2E; // มัทฉะเข้มขึ้น ใช้กับตัวอักษรขนาดเล็ก
+$muted-ink:    #7A6A5C;
+$line:         #E4DACB;
+
+// ---------- 2) แมปเข้าตัวแปรหลักของ Bootstrap ----------
+$primary:   $coffee;
+$secondary: $matcha;
+$success:   #198754;
+$warning:   $coffee-gold;
+$danger:    #DC3545;
+$info:      $matcha;
+$light:     $cream;
+$dark:      $coffee-dark;
+
+$theme-colors: (
+  "primary":   $primary,
+  "secondary": $secondary,
+  "success":   $success,
+  "info":      $info,
+  "warning":   $warning,
+  "danger":    $danger,
+  "light":     $light,
+  "dark":      $dark
+);
+
+// ---------- 3) พื้น / ตัวอักษร / เส้นขอบ ----------
+$body-bg:        $cream;
+$body-color:     $ink;
+$body-secondary-color: $muted-ink;
+$border-color:   $line;
+$border-radius:    .5rem;
+$border-radius-sm: .375rem;
+$border-radius-lg: .75rem;
+
+$link-color:            $primary;
+$link-hover-color:      $coffee-dark;
+$link-decoration:       none;
+$link-hover-decoration: underline;
+
+// ---------- 4) ตัวอักษร (รองรับภาษาไทย) ----------
+$font-family-sans-serif: "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, -apple-system, sans-serif;
+$font-size-base:  1rem;      // 16px
+$body-line-height: 1.6;
+$headings-font-weight: 600;
+$headings-color: $coffee-dark;
+
+// ---------- 5) ปุ่ม ----------
+// กฎของธีม: ทองกาแฟ = ปุ่ม CTA เท่านั้น (เพิ่มลงตะกร้า / สั่งซื้อ / ชำระเงิน)
+// ปุ่มอื่นทั้งหมดใช้ btn-primary (กาแฟ) หรือ btn-outline-primary
+$btn-font-weight:     600;
+$btn-padding-y:       .5rem;
+$btn-padding-x:       1rem;
+$btn-focus-width:     .2rem;
+
+// ทำให้ btn-warning มีตัวอักษรสีกาแฟเข้ม (คอนทราสต์พอ) แทนสีขาว
+$min-contrast-ratio:  3;
+$color-contrast-dark:  $coffee-dark;
+$color-contrast-light: $white;
+
+// ---------- 6) Navbar / การ์ด / ฟอร์ม ----------
+$navbar-padding-y:            .75rem;
+$navbar-dark-color:           rgba($cream, .8);
+$navbar-dark-hover-color:     $cream;
+$navbar-dark-active-color:    $coffee-gold;
+
+$card-bg:            $white;
+$card-border-color:  $line;
+$card-cap-bg:        $cream;
+$card-spacer-y:      1rem;
+$card-spacer-x:      1rem;
+
+$input-bg:                  $white;
+$input-border-color:        $line;
+$input-focus-border-color:  $coffee-gold;
+$input-focus-box-shadow:    0 0 0 .2rem rgba($coffee-gold, .25);
+$input-placeholder-color:   $muted-ink;
+
+$badge-font-weight: 600;
+$badge-padding-y:   .3em;
+$badge-padding-x:   .6em;
+
+// ---------- 7) คลาสช่วยของร้าน (เขียนหลัง import bootstrap) ----------
+// .btn-cta        → ปุ่มสั่งซื้อ: พื้นทองกาแฟ + ตัวอักษรกาแฟเข้ม
+// .bg-matcha-soft → พื้นมัทฉะอ่อน สำหรับกล่องสะสมแต้ม/โปรโมชั่น
+// .text-matcha    → ตัวอักษรมัทฉะเข้ม ($matcha-ink) ใช้กับตัวเล็ก
+//
+// .btn-cta{ --bs-btn-bg:#{$coffee-gold}; --bs-btn-color:#{$coffee-dark};
+//           --bs-btn-hover-bg:#{darken($coffee-gold,7%)}; --bs-btn-hover-color:#{$coffee-dark};
+//           --bs-btn-border-color:#{$coffee-gold}; font-weight:600; }
+// .bg-matcha-soft{ background-color:#{$matcha-light}; }
+// .text-matcha{ color:#{$matcha-ink}; }
+
+// ==========================================================
+// 8) โหมดมืดสำหรับหน้าแอดมิน (ยังไม่ต้องใช้ตอนนี้ — เปิดเมื่อพร้อม)
+// ----------------------------------------------------------
+// ขั้นที่ 1: เปิดโหมดมืดของ Bootstrap 5.3
+$enable-dark-mode: true;
+$color-mode-type: data;   // สั่งด้วย <html data-bs-theme="dark">
+
+// ขั้นที่ 2: ทับค่าสีโหมดมืดให้เป็นโทน Dark Mocha + Mango
+// (เขียนบล็อกนี้ "หลัง" @import bootstrap)
+//
+// [data-bs-theme="dark"]{
+//   --bs-body-bg:            #1E1712;   // พื้นหลัง
+//   --bs-body-color:         #F4EAE0;   // ตัวอักษร
+//   --bs-secondary-color:    #A99A8C;
+//   --bs-body-bg-secondary:  #2A211B;   // การ์ด/พื้นรอง
+//   --bs-border-color:       rgba(244,234,224,.14);
+//   --bs-primary:            #F2A33C;   // มะม่วง = ปุ่มหลักในโหมดมืด
+//   --bs-primary-rgb:        242,163,60;
+//   --bs-success:            #6FBF8B;
+//   --bs-link-color:         #F2A33C;
+//   --bs-link-hover-color:   #FFB35C;
+//   --bs-emphasis-color:     #FFFFFF;
+// }
+// [data-bs-theme="dark"] .card{ background-color:#2A211B; }
+// [data-bs-theme="dark"] .btn-primary{
+//   --bs-btn-bg:#F2A33C; --bs-btn-color:#1E1712;
+//   --bs-btn-hover-bg:#FFB35C; --bs-btn-hover-color:#1E1712;
+//   --bs-btn-border-color:#F2A33C;
+// }
+//
+// ขั้นที่ 3: ปุ่มสลับในหน้าแอดมิน (จำค่าไว้ใน localStorage)
+// <button id="themeToggle" class="btn btn-sm btn-outline-primary">โหมดมืด</button>
+//
+// const html = document.documentElement;
+// html.dataset.bsTheme = localStorage.getItem('nc-theme') || 'light';
+// themeToggle.addEventListener('click', () => {
+//   const next = html.dataset.bsTheme === 'dark' ? 'light' : 'dark';
+//   html.dataset.bsTheme = next;
+//   localStorage.setItem('nc-theme', next);
+// });
+//
+// หมายเหตุ: ใช้เฉพาะ layout ฝั่งแอดมิน (resources/views/layouts/admin.blade.php)
+// ฝั่งลูกค้าคงเป็นโทนครีมสว่างเสมอ — อย่าใส่ data-bs-theme ใน layout ลูกค้า
+// ==========================================================
